@@ -1,30 +1,43 @@
-# React + TypeScript + Vite
+# Desplegar fácil y rápido Vite React en Github Pages
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> [!IMPORTANT]
+> Si o si, necesitas haber hecho `git init` y ademas agregar el `git remote add origin url` en local, porque si no te sale un error, no es necesario haber hecho un commit almenos.
 
-Currently, two official plugins are available:
+### 1. Instale el paquete
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+pnpm i gh-pages --D
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 2. En el `package.json`, agregue esta linea, para hacer el deploy
+
+```
+"deploy": "gh-pages -d dist",
+```
+
+### 3. En el archivo `vite.config.ts`, agregue esta línea antes de `plugins: [react()]`
+
+Tiene que coincidir con el nombre del repositorio que tiene en el github
+
+```
+base: "/NOMBRE-DEL-REPOSITORIO",
+```
+
+### 4. Primero generar el dist
+
+Porque el contenido de esa carpeta es la que se va a subir en la rama gh-pages del repositorio
+
+```
+pnpm run build
+```
+
+### 5. Finalmente, ejecute este comando para hacer el deploy
+
+Lo que va hacer es subir el contenido de la carpeta dist a la rama gh-pages del repositorio
+
+```
+pnpm run deploy
+```
+
+> [!NOTE]
+> FUENTE ORIGINAL: https://dev.to/rashidshamloo/deploying-vite-react-app-to-github-pages-35hf
