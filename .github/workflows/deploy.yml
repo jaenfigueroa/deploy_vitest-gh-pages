@@ -39,4 +39,4 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          pnpm run deploy -t $GITHUB_TOKEN
+          gh-pages -d dist -t $GITHUB_TOKEN
