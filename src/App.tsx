@@ -22,6 +22,7 @@ function App() {
 
   return (
     <>
+      SAN PABLO
       {/* <img src={img1} alt='-1' /> */}
       <img src={img2} alt="-2" /> {/* FUNCIONA EN DEPLOY */}
       {/* <img src={img3} alt='-3' /> */}
