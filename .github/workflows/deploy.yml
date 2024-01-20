@@ -1,0 +1,39 @@
+name: Desplegar React vite en github pages
+
+on:
+  push:
+    tags:
+      - "dev-*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: seleccionar al version de nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Establecer variable GITHUB_ACTIONS
+        run: echo "GITHUB_ACTIONS=true" >> $GITHUB_ENV
+
+      - name: Instalar dependencias y construir el dist
+        working-directory: ./src
+        run: |
+          pnpm install
+          pnpm run build
+
+      - name: Desplegar el dist en GitHub Pages
+        run: pnpm run deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
