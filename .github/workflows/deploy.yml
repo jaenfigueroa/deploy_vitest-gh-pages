@@ -35,7 +35,7 @@ jobs:
           pnpm install
           pnpm run build
 
-      - name: Deploy with gh-pages
+      - name: Desplegar con gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
