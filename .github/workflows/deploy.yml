@@ -33,7 +33,12 @@ jobs:
           pnpm install
           pnpm run build
 
+      - name: Configurar usuario de Git
+        run: |
+          git config --global user.email "actions@example.com"
+          git config --global user.name "GitHub Actions"
+
       - name: Desplegar el dist en GitHub Pages
-        run: pnpm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm run deploy
